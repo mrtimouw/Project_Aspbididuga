@@ -4,13 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f8eee9">
-  <title>[TITOLO DELLA PAGINA]</title>
+  <title>Per Polpetta</title>
 
   <style>
     :root {
       --cream: #fbf5ef;
       --paper: #fffdf9;
-      --rose: #d9a6a0;
       --rose-dark: #a85f68;
       --wine: #713f4b;
       --ink: #49383a;
@@ -31,10 +30,7 @@
     button { font: inherit; }
     .hidden { display: none !important; }
 
-    .page {
-      width: min(100% - 36px, 900px);
-      margin: 0 auto;
-    }
+    .page { width: min(100% - 36px, 900px); margin: 0 auto; }
 
     .eyebrow {
       color: var(--rose-dark);
@@ -75,51 +71,75 @@
         var(--cream);
     }
     .opening-content { max-width: 600px; }
+
+    /* BUSTA: il corpo copre tutta la lettera finché è chiusa */
     .envelope {
       position: relative;
-      width: min(280px, 75vw);
-      height: 185px;
+      width: min(300px, 80vw);
+      height: 200px;
       margin: 35px auto 30px;
-      background: #e9c8c1;
-      border-radius: 7px;
+      background: #e3b9b1;
+      border: 1px solid #d4a29a;
+      border-radius: 8px;
       box-shadow: var(--shadow);
       cursor: pointer;
       perspective: 700px;
+      isolation: isolate;
     }
-    .envelope::before, .envelope::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: 7px;
-    }
-    .envelope::before {
-      background: #d9aaa5;
-      clip-path: polygon(0 0, 50% 58%, 100% 0);
-      transform-origin: top;
-      transition: transform .8s ease;
-      z-index: 3;
-    }
-    .envelope::after {
-      background: #f0d8d0;
-      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
-      z-index: 2;
-    }
+    /* Lettera dentro la busta: resta sotto la tasca finché la busta è chiusa */
     .envelope-letter {
       position: absolute;
-      left: 8%;
-      top: 12%;
-      width: 84%;
-      height: 78%;
+      left: 7%;
+      top: 14%;
+      width: 86%;
+      height: 74%;
       display: grid;
       place-items: center;
-      padding: 15px;
+      padding: 14px 12px;
       background: var(--paper);
+      background-image: repeating-linear-gradient(transparent 0 17px, #f0e4de 18px 19px);
       color: var(--wine);
+      font: 1rem/1.4 Georgia, "Times New Roman", serif;
+      text-align: center;
+      border-radius: 3px;
       transition: transform .8s ease;
       z-index: 1;
     }
+    /* Tasca frontale: copre tutto il corpo della busta, sopra la lettera */
+    .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #f3d9d2;
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 1px rgba(212, 162, 154, .45);
+      z-index: 2;
+    }
+    /* Falda superiore a V con il cuore */
+    .envelope::before {
+      content: "♥";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 6px;
+      box-sizing: border-box;
+      color: #fffdf9;
+      font-size: 1.1rem;
+      background: #d49b94;
+      clip-path: polygon(0 0, 100% 0, 50% 62%);
+      border-radius: 8px 8px 0 0;
+      transform-origin: top center;
+      transition: transform .8s ease, z-index 0s .4s;
+      z-index: 3;
+    }
+    /* Apertura: la falda si ribalta e la lettera esce sopra la tasca */
     .envelope.open::before { transform: rotateX(180deg); z-index: 0; }
-    .envelope.open .envelope-letter { transform: translateY(-75px); }
+    .envelope.open .envelope-letter { transform: translateY(-85px); z-index: 4; }
     .opening-hint { color: var(--muted); font-size: .9rem; }
 
     /* SEZIONE INTRODUTTIVA */
@@ -142,34 +162,6 @@
     .counter-item strong { display: block; color: var(--wine); font-size: 1.8rem; font-weight: 400; }
     .counter-item span { color: var(--muted); font: .68rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .1em; }
 
-    /* FOTO / RICORDI */
-    .memory-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 22px;
-      text-align: left;
-    }
-    .memory-card {
-      padding: 12px 12px 18px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-      transform: rotate(var(--tilt, 0deg));
-    }
-    .photo-placeholder {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f0ddd6, #e5c5c0);
-      color: var(--wine);
-      font: .85rem Arial, sans-serif;
-      text-align: center;
-    }
-    .photo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-    .memory-card h3 { margin: 15px 5px 5px; font-size: 1.25rem; }
-    .memory-card p { margin: 0 5px; color: var(--muted); font-size: .92rem; }
-
     /* DEDICHE */
     .reasons-grid {
       display: grid;
@@ -186,6 +178,13 @@
     .reason .heart { color: var(--rose-dark); font-size: 1.4rem; }
     .reason h3 { margin: 8px 0; font-size: 1.3rem; }
     .reason p { margin: 0; color: var(--muted); }
+
+    /* DEDICA SFOCATA: si rivela con un tocco */
+    .reveal { cursor: pointer; }
+    .reveal .blurred-content { filter: blur(9px); transition: filter .6s ease; user-select: none; }
+    .reveal.revealed .blurred-content { filter: none; user-select: auto; }
+    .tap-hint { display: block; margin-top: 8px; color: var(--rose-dark); font: .75rem Arial, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+    .reveal.revealed .tap-hint { display: none; }
 
     /* LETTERA */
     #letter-section { padding-top: 55px; padding-bottom: 110px; }
@@ -204,7 +203,7 @@
     .letter-body { white-space: pre-line; min-height: 180px; }
     .signature { margin-top: 35px; text-align: right; color: var(--wine); font-style: italic; }
 
-    /* FINALE */
+    /* FOTO E FINALE */
     #finale {
       padding: 100px 18px;
       text-align: center;
@@ -213,8 +212,8 @@
     }
     #finale h2 { max-width: 700px; margin: 0 auto 20px; }
     #finale p { color: rgba(255,255,255,.85); }
-    .final-photo {
-      width: min(300px, 75vw);
+    .photo {
+      width: min(320px, 80vw);
       aspect-ratio: 1;
       margin: 30px auto;
       border: 9px solid rgba(255,255,255,.85);
@@ -222,7 +221,7 @@
       background: #e8c9c2;
       overflow: hidden;
     }
-    .final-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
     footer { padding: 22px; text-align: center; color: var(--muted); font-size: .8rem; }
 
     .music-button {
@@ -245,8 +244,7 @@
 
     @media (max-width: 600px) {
       .section { padding: 70px 0; }
-      .memory-grid, .reasons-grid { grid-template-columns: 1fr; }
-      .memory-card { transform: none; }
+      .reasons-grid { grid-template-columns: 1fr; }
       .counter-item { min-width: 72px; }
     }
 
@@ -259,33 +257,33 @@
 <body>
   <!--
     PERSONALIZZAZIONE RAPIDA:
-    1. Cerca i testi tra parentesi quadre, ad esempio [INSERISCI TESTO].
-    2. Sostituisci le date nel formato YYYY-MM-DD.
-    3. Inserisci le foto nella cartella assets/images e aggiorna i relativi src.
-    4. Inserisci la musica in assets/music/song.mp3.
+    1. Sostituisci i testi tra parentesi quadre, ad esempio [NOME] e [NOMIGNOLO].
+    2. Imposta la data di inizio nel formato YYYY-MM-DD in anniversaryDate (in fondo al file).
+    3. Metti index.html, foto.jpg e song.mp3 nella stessa cartella del repository di GitHub Pages.
+       Se la foto manca, al suo posto compare un segnaposto.
+    4. La musica è facoltativa: se manca song.mp3, la pagina funziona lo stesso.
   -->
 
   <section id="opening">
     <div class="opening-content fade-in">
-      <div class="eyebrow">[PICCOLA INTRODUZIONE]</div>
-      <h1>[TITOLO INIZIALE]</h1>
-      <p>[BREVE FRASE DI APERTURA]</p>
+      <div class="eyebrow"></div>
+      <h1>Non una normale lettera d'amore</h1>
+      <p>Cinque anni insieme, e ogni giorno con te è ancora una sorpresa.</p>
 
       <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Apri la busta">
-        <div class="envelope-letter">[TESTO SULLA LETTERA]</div>
+        <div class="envelope-letter">Per te, Pingu</div>
       </div>
 
-      <p class="opening-hint">[INVITO A CLICCARE SULLA BUSTA]</p>
-      <button class="primary-button" id="openButton">[TESTO DEL PULSANTE]</button>
+      <button class="primary-button" id="openButton">Apri la lettera</button>
     </div>
   </section>
 
   <main id="main-content" class="hidden">
     <section id="intro" class="section page fade-in">
-      <div class="eyebrow">[SOTTOTITOLO]</div>
-      <h2>[TITOLO DELLA SEZIONE]</h2>
-      <p class="section-intro">[TESTO INTRODUTTIVO]</p>
-      <p class="date-label">[DATA SPECIALE]</p>
+      <div class="eyebrow">Cinque anni insieme</div>
+      <h2>Da 17 novembre 2021 a oggi</h2>
+      <p class="section-intro">Ogni secondo passato conta.</p>
+      <p class="date-label">Il nostro inizio: 17 novembre 2021</p>
 
       <div class="counter" aria-label="Tempo trascorso">
         <div class="counter-item"><strong id="days">0</strong><span>Giorni</span></div>
@@ -295,120 +293,75 @@
       </div>
     </section>
 
-    <section id="memories" class="section page">
-      <div class="eyebrow">[SOTTOTITOLO RICORDI]</div>
-      <h2>[TITOLO DEI RICORDI]</h2>
-      <p class="section-intro">[BREVE INTRODUZIONE ALLA GALLERIA]</p>
-
-      <div class="memory-grid">
-        <!-- Duplica o elimina le schede secondo necessità. -->
-        <article class="memory-card" style="--tilt: -1deg">
-          <div class="photo-placeholder">
-            <img src="assets/images/foto1.jpg" alt="[DESCRIZIONE FOTO 1]"
-                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 1]'">
-          </div>
-          <h3>[TITOLO RICORDO 1]</h3>
-          <p>[DESCRIZIONE RICORDO 1]</p>
-        </article>
-
-        <article class="memory-card" style="--tilt: 1deg">
-          <div class="photo-placeholder">
-            <img src="assets/images/foto2.jpg" alt="[DESCRIZIONE FOTO 2]"
-                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 2]'">
-          </div>
-          <h3>[TITOLO RICORDO 2]</h3>
-          <p>[DESCRIZIONE RICORDO 2]</p>
-        </article>
-
-        <article class="memory-card" style="--tilt: 1deg">
-          <div class="photo-placeholder">
-            <img src="assets/images/foto3.jpg" alt="[DESCRIZIONE FOTO 3]"
-                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 3]'">
-          </div>
-          <h3>[TITOLO RICORDO 3]</h3>
-          <p>[DESCRIZIONE RICORDO 3]</p>
-        </article>
-
-        <article class="memory-card" style="--tilt: -1deg">
-          <div class="photo-placeholder">
-            <img src="assets/images/foto4.jpg" alt="[DESCRIZIONE FOTO 4]"
-                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 4]'">
-          </div>
-          <h3>[TITOLO RICORDO 4]</h3>
-          <p>[DESCRIZIONE RICORDO 4]</p>
-        </article>
-      </div>
-    </section>
-
     <section id="reasons" class="section page">
-      <div class="eyebrow">[SOTTOTITOLO DEDICHE]</div>
-      <h2>[TITOLO DELLE DEDICHE]</h2>
-      <p class="section-intro">[TESTO INTRODUTTIVO]</p>
+      <h2>Perché ti amo</h2>
+      <p class="section-intro">Non basterebbe una lista, ma ci provo.</p>
 
       <div class="reasons-grid">
-        <!-- Duplica questi blocchi per aggiungere altre dediche. -->
         <article class="reason">
           <div class="heart">♥</div>
-          <h3>[DEDICA 1 - TITOLO]</h3>
-          <p>[DEDICA 1 - TESTO]</p>
+          <h3>Il tuo sorriso</h3>
+          <p>Tu mi chiedi sempre perché sia sempre buffo o divertente, il motivo è che quando tu sorridi tutto il mondo sembra più bello.</p>
         </article>
         <article class="reason">
           <div class="heart">♥</div>
-          <h3>[DEDICA 2 - TITOLO]</h3>
-          <p>[DEDICA 2 - TESTO]</p>
+          <h3>La tua timidezza</h3>
+          <p>Mi piace quando sei timida, con quella tua aria innocente e faccina adorabile.</p>
         </article>
         <article class="reason">
           <div class="heart">♥</div>
-          <h3>[DEDICA 3 - TITOLO]</h3>
-          <p>[DEDICA 3 - TESTO]</p>
+          <h3>Le piccole cose</h3>
+          <p>Adoro il modo in cui ti prendi cura di ogni singola esperienza e dettaglio, proprio come fai con i tuoi album.</p>
         </article>
-        <article class="reason">
+        <article class="reason reveal" id="secret" tabindex="0" role="button" aria-label="Tocca per scoprire">
           <div class="heart">♥</div>
-          <h3>[DEDICA 4 - TITOLO]</h3>
-          <p>[DEDICA 4 - TESTO]</p>
+          <div class="blurred-content">
+            <h3>Una sorpresa</h3>
+            <p>••••••••••••••••••••••••••••</p>
+          </div>
+          <span class="tap-hint">Tocca per scoprire</span>
         </article>
       </div>
     </section>
 
     <section id="letter-section" class="section page">
-      <div class="eyebrow">[SOTTOTITOLO LETTERA]</div>
+      <div class="eyebrow">La mia lettera</div>
       <div class="letter">
-        <h2>[TITOLO DELLA LETTERA]</h2>
-        <p>[SALUTO INIZIALE]</p>
-        <div class="letter-body">[INSERISCI QUI IL TESTO COMPLETO DELLA TUA LETTERA]
+        <h2>Per te, Polpetta</h2>
+        <p>Polpetta,</p>
+        <div class="letter-body">Un po' di tempo fa ti eri preoccupata perché pensavi avessi dimenticato il tuo primo nomignolo però stai pure tranquilla che non potrei mai dimenticarmelo, ormai sono passati 5 anni e ogni giorno che passa ti amo sempre di più, sei la mia metà, la mia anima gemella, il mio infinito fattoriale.
+          Sai bene che la mia calligrafia non è il massimo PERÒ con il PC ci so fare, quindi spero che tu possa apprezzare questa lettera, anche se non è scritta a mano. Ti amo, oggi e ogni giorno che verrà.</div>
 
-[PUOI ANDARE A CAPO PER SEPARARE I PARAGRAFI]</div>
-        <div class="signature">[FIRMA]</div>
+        <div class="signature">Il tuo Pingu</div>
       </div>
     </section>
 
     <section id="finale">
-      <div class="eyebrow">[SOTTOTITOLO FINALE]</div>
-      <h2>[DEDICA FINALE]</h2>
-      <p>[ULTIMA FRASE]</p>
-      <div class="final-photo">
-        <img src="assets/images/foto-finale.jpg" alt="[DESCRIZIONE FOTO FINALE]"
-             onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO FINALE]'">
+      <div class="eyebrow">Per sempre</div>
+      <h2>Ti amo, Polpetta</h2>
+      <p>Grazie di esistere, e grazie di essere il mio tutto</p>
+      <div class="photo">
+        <img src="foto.jpg" alt="Noi due"
+             onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO: foto.jpg]'">
       </div>
-      <p>[FIRMA O MESSAGGIO CONCLUSIVO]</p>
+      <p>Il tuo Pingu ♥</p>
     </section>
 
-    <footer>[TESTO DEL PIEDE PAGINA]</footer>
+    <footer>Fatto con amore per Polpetta · 2026</footer>
   </main>
 
-  <!-- Musica: aggiungi il file assets/music/song.mp3 -->
+  <!-- Musica facoltativa: metti song.mp3 nella stessa cartella di index.html -->
   <audio id="backgroundMusic" loop>
-    <source src="assets/music/song.mp3" type="audio/mpeg">
+    <source src="song.mp3" type="audio/mpeg">
   </audio>
   <button class="music-button hidden" id="musicButton" aria-label="Attiva o disattiva la musica">♫</button>
 
   <script>
     /*
       CONFIGURAZIONE:
-      Inserisci la data di inizio della relazione nel formato YYYY-MM-DD.
-      Esempio di formato: "2021-11-17"
+      Data di inizio della relazione nel formato YYYY-MM-DD.
     */
-    const anniversaryDate = "YYYY-MM-DD";
+    const anniversaryDate = "2021-11-17";
 
     const opening = document.getElementById("opening");
     const mainContent = document.getElementById("main-content");
@@ -418,6 +371,7 @@
     const musicButton = document.getElementById("musicButton");
 
     function openLetter() {
+      if (envelope.classList.contains("open")) return;
       envelope.classList.add("open");
 
       window.setTimeout(() => {
@@ -430,9 +384,7 @@
       }, 850);
 
       // La riproduzione viene tentata dopo il clic dell'utente.
-      music.play().catch(() => {
-        // Se il browser blocca la riproduzione, si potrà usare il pulsante musicale.
-      });
+      music.play().catch(() => {});
     }
 
     openButton.addEventListener("click", openLetter);
@@ -463,6 +415,33 @@
       document.getElementById("minutes").textContent = minutes;
       document.getElementById("seconds").textContent = seconds;
     }
+
+    // Il testo della dedica sfocata non sta nell'HTML: viene inserito solo dopo il tocco.
+    const secretCard = document.getElementById("secret");
+    const secretContent = {
+      title: "Il tuo sedere",
+      text: "Madonna quanto è bello! Vorrei poterlo usare ogni giorno anche come cuscino."
+    };
+
+    function revealSecret() {
+      if (secretCard.classList.contains("revealed")) return;
+      const box = secretCard.querySelector(".blurred-content");
+      box.replaceChildren();
+      const title = document.createElement("h3");
+      title.textContent = secretContent.title;
+      const text = document.createElement("p");
+      text.textContent = secretContent.text;
+      box.append(title, text);
+      secretCard.classList.add("revealed");
+    }
+
+    secretCard.addEventListener("click", revealSecret);
+    secretCard.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        revealSecret();
+      }
+    });
 
     musicButton.addEventListener("click", async () => {
       if (music.paused) {
