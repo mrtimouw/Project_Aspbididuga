@@ -1,379 +1,484 @@
-
-
-<!--SE SEI VENUTO NEL CODICE PER VEDERE LE SOLUZIONI SEI VERAMENTE UNA PUSSY,
-PERO' EHI, SE HAI BISOGNO DI AIUTO PER RISOLVERE GLI ENIGMI, PERCHE' SONO TROPPO DIFFICILI PER TE...
-ECCO LE SOLUZIONI:
-
-
-
-ENIGMA 1: TU MA'
-ENIGMA 2: TU PA'
-ENIGMA 3: FANCULO
-
-ENIGMA 4: FOTTITI
-ENIGMA 5: BASTARDO
-ENIGMA 6: LEZZO
-
-ENIGMA 7: STRONZO
-ENIGMA 8: VATTENE
-ENIGMA 9: VAI A FOTTERE
-
-il cazzo te le elenco pure, non riesci a capire nemmeno quello:
-
-BUONA FORTUNA a cercare!--
--->
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caccia al Tesoro per un giorno a caso dell'anno</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f8eee9">
+  <title>[TITOLO DELLA PAGINA]</title>
 
+  <style>
+    :root {
+      --cream: #fbf5ef;
+      --paper: #fffdf9;
+      --rose: #d9a6a0;
+      --rose-dark: #a85f68;
+      --wine: #713f4b;
+      --ink: #49383a;
+      --muted: #8b7777;
+      --line: #eadbd5;
+      --shadow: 0 18px 50px rgba(93, 56, 62, .11);
+    }
 
-<style>
-body{
-    font-family: Arial, sans-serif;
-    text-align:center;
-    background:#f5f5f5;
-    padding:40px;
-}
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.65;
+    }
+    button { font: inherit; }
+    .hidden { display: none !important; }
 
-.card{
-    max-width:800px;
-    margin:auto;
-    background:white;
-    padding:30px;
-    border-radius:15px;
-    box-shadow:0 0 15px rgba(0,0,0,0.1);
-}
+    .page {
+      width: min(100% - 36px, 900px);
+      margin: 0 auto;
+    }
 
-.hidden{
-    display:none;
-}
+    .eyebrow {
+      color: var(--rose-dark);
+      text-transform: uppercase;
+      letter-spacing: .22em;
+      font: 600 .72rem/1.4 Arial, sans-serif;
+    }
 
-input{
-    padding:10px;
-    width:300px;
-    margin:10px;
-}
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { font-weight: 400; line-height: 1.2; }
+    h1 { font-size: clamp(2.5rem, 8vw, 5rem); }
+    h2 { font-size: clamp(2rem, 6vw, 3.2rem); }
+    .section { padding: 92px 0; text-align: center; }
+    .section-intro { max-width: 620px; margin: 0 auto 38px; color: var(--muted); }
 
-button{
-    padding:10px 20px;
-    cursor:pointer;
-}
+    .primary-button {
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 25px;
+      color: white;
+      background: var(--wine);
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+      box-shadow: 0 8px 22px rgba(113, 63, 75, .18);
+    }
+    .primary-button:hover { transform: translateY(-2px); background: var(--rose-dark); }
 
-.success{
-    color:green;
-    font-weight:bold;
-}
+    /* APERTURA */
+    #opening {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 35px 18px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(217,166,160,.20), transparent 30%),
+        radial-gradient(circle at 85% 80%, rgba(168,95,104,.12), transparent 32%),
+        var(--cream);
+    }
+    .opening-content { max-width: 600px; }
+    .envelope {
+      position: relative;
+      width: min(280px, 75vw);
+      height: 185px;
+      margin: 35px auto 30px;
+      background: #e9c8c1;
+      border-radius: 7px;
+      box-shadow: var(--shadow);
+      cursor: pointer;
+      perspective: 700px;
+    }
+    .envelope::before, .envelope::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 7px;
+    }
+    .envelope::before {
+      background: #d9aaa5;
+      clip-path: polygon(0 0, 50% 58%, 100% 0);
+      transform-origin: top;
+      transition: transform .8s ease;
+      z-index: 3;
+    }
+    .envelope::after {
+      background: #f0d8d0;
+      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+      z-index: 2;
+    }
+    .envelope-letter {
+      position: absolute;
+      left: 8%;
+      top: 12%;
+      width: 84%;
+      height: 78%;
+      display: grid;
+      place-items: center;
+      padding: 15px;
+      background: var(--paper);
+      color: var(--wine);
+      transition: transform .8s ease;
+      z-index: 1;
+    }
+    .envelope.open::before { transform: rotateX(180deg); z-index: 0; }
+    .envelope.open .envelope-letter { transform: translateY(-75px); }
+    .opening-hint { color: var(--muted); font-size: .9rem; }
 
-.final{
-    font-size:30px;
-    font-weight:bold;
-    color:#d35400;
-}
-</style>
+    /* SEZIONE INTRODUTTIVA */
+    #intro { padding-top: 105px; }
+    .date-label { color: var(--rose-dark); letter-spacing: .12em; }
+    .counter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 34px 0;
+    }
+    .counter-item {
+      min-width: 88px;
+      padding: 15px 12px;
+      background: rgba(255,255,255,.7);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+    .counter-item strong { display: block; color: var(--wine); font-size: 1.8rem; font-weight: 400; }
+    .counter-item span { color: var(--muted); font: .68rem Arial, sans-serif; text-transform: uppercase; letter-spacing: .1em; }
+
+    /* FOTO / RICORDI */
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      text-align: left;
+    }
+    .memory-card {
+      padding: 12px 12px 18px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      transform: rotate(var(--tilt, 0deg));
+    }
+    .photo-placeholder {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f0ddd6, #e5c5c0);
+      color: var(--wine);
+      font: .85rem Arial, sans-serif;
+      text-align: center;
+    }
+    .photo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+    .memory-card h3 { margin: 15px 5px 5px; font-size: 1.25rem; }
+    .memory-card p { margin: 0 5px; color: var(--muted); font-size: .92rem; }
+
+    /* DEDICHE */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+    .reason {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.65);
+    }
+    .reason .heart { color: var(--rose-dark); font-size: 1.4rem; }
+    .reason h3 { margin: 8px 0; font-size: 1.3rem; }
+    .reason p { margin: 0; color: var(--muted); }
+
+    /* LETTERA */
+    #letter-section { padding-top: 55px; padding-bottom: 110px; }
+    .letter {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: clamp(28px, 7vw, 65px);
+      background:
+        linear-gradient(rgba(255,253,249,.94), rgba(255,253,249,.94)),
+        repeating-linear-gradient(transparent 0 34px, #eadbd5 35px 36px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      text-align: left;
+    }
+    .letter h2 { text-align: center; }
+    .letter-body { white-space: pre-line; min-height: 180px; }
+    .signature { margin-top: 35px; text-align: right; color: var(--wine); font-style: italic; }
+
+    /* FINALE */
+    #finale {
+      padding: 100px 18px;
+      text-align: center;
+      color: var(--paper);
+      background: linear-gradient(140deg, #754653, #a96c76);
+    }
+    #finale h2 { max-width: 700px; margin: 0 auto 20px; }
+    #finale p { color: rgba(255,255,255,.85); }
+    .final-photo {
+      width: min(300px, 75vw);
+      aspect-ratio: 1;
+      margin: 30px auto;
+      border: 9px solid rgba(255,255,255,.85);
+      box-shadow: 0 15px 45px rgba(0,0,0,.18);
+      background: #e8c9c2;
+      overflow: hidden;
+    }
+    .final-photo img { width: 100%; height: 100%; object-fit: cover; }
+    footer { padding: 22px; text-align: center; color: var(--muted); font-size: .8rem; }
+
+    .music-button {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 10;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+      color: var(--wine);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .fade-in { animation: fadeIn .9s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 600px) {
+      .section { padding: 70px 0; }
+      .memory-grid, .reasons-grid { grid-template-columns: 1fr; }
+      .memory-card { transform: none; }
+      .counter-item { min-width: 72px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
 </head>
+
 <body>
-
-<script>
-
-function success(text){
-    document.getElementById("msg").innerText = text;
-}
-
-function wrong(){
-    alert("Risposta errata. Riprova.");
-}
-
-function check1(){
-    let a=document.getElementById("answer1").value.toLowerCase().trim();
-
-    if(a==="futuro"){
-        document.getElementById("step2").classList.remove("hidden");
-        success("Enigma 1 completato.");
-    }else wrong();
-}
-
-function check2(){
-    let a=document.getElementById("answer2").value.trim();
-
-    if(a==="56"){
-        document.getElementById("step3").classList.remove("hidden");
-        success("Enigma 2 completato.");
-    }else wrong();
-}
-
-function check3(){
-    let a=document.getElementById("answer3").value.toLowerCase().trim();
-
-    if(a==="ma"){
-        document.getElementById("step4").classList.remove("hidden");
-        success("Enigma 3 completato.");
-    }else wrong();
-}
-
-function check4(){
-    let a=document.getElementById("answer4").value.trim();
-
-    if(a==="1101"){
-        document.getElementById("step5").classList.remove("hidden");
-        success("Enigma 4 completato.");
-    }else wrong();
-}
-
-function check5(){
-    let a=document.getElementById("answer5").value.toLowerCase().trim();
-
-    if(a==="assembly"){
-        document.getElementById("step6").classList.remove("hidden");
-        success("Enigma 5 completato.");
-    }else wrong();
-}
-
-function check6(){
-    let a=document.getElementById("answer6").value.toLowerCase().trim();
-
-    if(a==="albero binario" || a==="binary tree"){
-        document.getElementById("step7").classList.remove("hidden");
-        success("Enigma 6 completato.");
-    }else wrong();
-}
-
-function check7(){
-    let a=document.getElementById("answer7").value.toLowerCase().trim();
-
-    if(a==="byte"){
-        document.getElementById("step8").classList.remove("hidden");
-        success("Enigma 7 completato.");
-    }else wrong();
-}
-
-function check8(){
-    let a=document.getElementById("answer8").value.trim();
-
-    if(a==="1024"){
-        document.getElementById("step9").classList.remove("hidden");
-        success("Enigma 8 completato.");
-    }else wrong();
-}
-
-function check9(){
-    let a=document.getElementById("answer9").value.toLowerCase().trim();
-
-    if(a==="null"){
-        document.getElementById("step10").classList.remove("hidden");
-        success("Enigma 9 completato.");
-    }else wrong();
-}
-
-
-function check10(){
-    let a=document.getElementById("answer10").value.toLowerCase().trim();
-
-    if(a==="risposta impossibile per far leggere il codice a chi non sa risolvere gli enigmi"){
-        document.getElementById("gift").classList.remove("hidden");
-        document.getElementById("msg").innerText="";
-    }else wrong();
-}
-
-</script>
-<div class="card">
-
-<h1>🎂 Caccia al Tesoro per un giorno a caso dell'anno 🎂</h1>
-
-<p>
-Per ottenere il tuo regalo dovrai dimostrare di essere degno.
-<br>
-Supera tutti gli enigmi.
-</p>
-
-<p id="msg" class="success"></p>
-
-<!-- ENIGMA 1 -->
-
-<div id="step1">
-<h2>Enigma 1</h2>
-
-<p>
-Sono sempre davanti a te ma non puoi mai raggiungermi.<br>
-Chi sono?
-</p>
-
-<input id="answer1">
-<br>
-<button onclick="check1()">Invia</button>
-</div>
-
-<!-- ENIGMA 2 -->
-
-<div id="step2" class="hidden">
-<h2>Enigma 2</h2>
-
-<p>
-Quanto fa 7 × 8?
-</p>
-
-<input id="answer2">
-<br>
-<button onclick="check2()">Invia</button>
-</div>
-
-<!-- ENIGMA 3 -->
-
-<div id="step3" class="hidden">
-<h2>Enigma 3</h2>
-
-<p>
-Completa la parola:
-<br>
-Tu __
-</p>
-
-<input id="answer3">
-<br>
-<button onclick="check3()">Invia</button>
-</div>
-
-<!-- ENIGMA 4 -->
-
-<div id="step4" class="hidden">
-<h2>Enigma 4</h2>
-
-<p>
-In binario, quanto vale il numero decimale 13?
-</p>
-
-<input id="answer4">
-<br>
-<button onclick="check4()">Invia</button>
-</div>
-
-<!-- ENIGMA 5 -->
-
-<div id="step5" class="hidden">
-<h2>Enigma 5</h2>
-
-<p>
-Sono il linguaggio più vicino all'hardware.<br>
-Non sono il codice macchina.<br>
-Chi sono?
-</p>
-
-<input id="answer5">
-<br>
-<button onclick="check5()">Invia</button>
-</div>
-
-<!-- ENIGMA 6 -->
-
-<div id="step6" class="hidden">
-<h2>Enigma 6</h2>
-
-<p>
-Se un algoritmo ha complessità O(log n),
-quale struttura dati viene comunemente usata per la ricerca?
-</p>
-
-<input id="answer6">
-<br>
-<button onclick="check6()">Invia</button>
-</div>
-
-<!-- ENIGMA 7 -->
-
-<div id="step7" class="hidden">
-<h2>Enigma 7</h2>
-
-<p>
-Ho 8 bit.<br>
-Posso rappresentare 256 valori distinti.<br>
-Chi sono?
-</p>
-
-<input id="answer7">
-<br>
-<button onclick="check7()">Invia</button>
-</div>
-
-<!-- ENIGMA 8 -->
-
-<div id="step8" class="hidden">
-<h2>Enigma 8</h2>
-
-<p>
-Quanto vale 2^10 ?
-</p>
-
-<input id="answer8">
-<br>
-<button onclick="check8()">Invia</button>
-</div>
-
-<!-- ENIGMA 9 -->
-
-<div id="step9" class="hidden">
-<h2>Enigma 9</h2>
-
-<p>
-Esisto ovunque in informatica.<br>
-Vengo usato per indicare assenza di valore.<br>
-In molti linguaggi mi chiamo NULL.<br>
-Chi sono?
-</p>
-
-<input id="answer9">
-<br>
-<button onclick="check9()">Invia</button>
-</div>
-
-<!-- ENIGMA 10 -->
-
-<div id="step10" class="hidden">
-<h2>Enigma 10</h2>
-
-<p>
-Arinza Arunza<br>
-Pietro Smusi<br>
-Mhanz<br>
-Chi sono?
-</p>
-
-<input id="answer10">
-<br>
-<button onclick="check10()">Invia</button>
-</div>
-
-<!-- REGALO -->
-
-<div id="gift" class="hidden">
-
-<h1>🎉 COMPLIMENTI 🎉</h1>
-
-<p class="final">
-HAI COMPLETATO LA CACCIA AL TESORO
-</p>
-
-<p class="final">
-🎁 IL TUO REGALO È:
-</p>
-
-<p class="final">
-💝 Un joystick Bianco che è gia in tuo possesso! 💝
-    come si dice, non siamo più parenti :D 
-</p>
-
-<p>
-se mi rompi i coglioni che non lo vuoi ti rompo le gambe, è un regalo, accettalo e basta.
-</p>
-
-</div>
-
-</div>
-
-
+  <!--
+    PERSONALIZZAZIONE RAPIDA:
+    1. Cerca i testi tra parentesi quadre, ad esempio [INSERISCI TESTO].
+    2. Sostituisci le date nel formato YYYY-MM-DD.
+    3. Inserisci le foto nella cartella assets/images e aggiorna i relativi src.
+    4. Inserisci la musica in assets/music/song.mp3.
+  -->
+
+  <section id="opening">
+    <div class="opening-content fade-in">
+      <div class="eyebrow">[PICCOLA INTRODUZIONE]</div>
+      <h1>[TITOLO INIZIALE]</h1>
+      <p>[BREVE FRASE DI APERTURA]</p>
+
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Apri la busta">
+        <div class="envelope-letter">[TESTO SULLA LETTERA]</div>
+      </div>
+
+      <p class="opening-hint">[INVITO A CLICCARE SULLA BUSTA]</p>
+      <button class="primary-button" id="openButton">[TESTO DEL PULSANTE]</button>
+    </div>
+  </section>
+
+  <main id="main-content" class="hidden">
+    <section id="intro" class="section page fade-in">
+      <div class="eyebrow">[SOTTOTITOLO]</div>
+      <h2>[TITOLO DELLA SEZIONE]</h2>
+      <p class="section-intro">[TESTO INTRODUTTIVO]</p>
+      <p class="date-label">[DATA SPECIALE]</p>
+
+      <div class="counter" aria-label="Tempo trascorso">
+        <div class="counter-item"><strong id="days">0</strong><span>Giorni</span></div>
+        <div class="counter-item"><strong id="hours">0</strong><span>Ore</span></div>
+        <div class="counter-item"><strong id="minutes">0</strong><span>Minuti</span></div>
+        <div class="counter-item"><strong id="seconds">0</strong><span>Secondi</span></div>
+      </div>
+    </section>
+
+    <section id="memories" class="section page">
+      <div class="eyebrow">[SOTTOTITOLO RICORDI]</div>
+      <h2>[TITOLO DEI RICORDI]</h2>
+      <p class="section-intro">[BREVE INTRODUZIONE ALLA GALLERIA]</p>
+
+      <div class="memory-grid">
+        <!-- Duplica o elimina le schede secondo necessità. -->
+        <article class="memory-card" style="--tilt: -1deg">
+          <div class="photo-placeholder">
+            <img src="assets/images/foto1.jpg" alt="[DESCRIZIONE FOTO 1]"
+                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 1]'">
+          </div>
+          <h3>[TITOLO RICORDO 1]</h3>
+          <p>[DESCRIZIONE RICORDO 1]</p>
+        </article>
+
+        <article class="memory-card" style="--tilt: 1deg">
+          <div class="photo-placeholder">
+            <img src="assets/images/foto2.jpg" alt="[DESCRIZIONE FOTO 2]"
+                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 2]'">
+          </div>
+          <h3>[TITOLO RICORDO 2]</h3>
+          <p>[DESCRIZIONE RICORDO 2]</p>
+        </article>
+
+        <article class="memory-card" style="--tilt: 1deg">
+          <div class="photo-placeholder">
+            <img src="assets/images/foto3.jpg" alt="[DESCRIZIONE FOTO 3]"
+                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 3]'">
+          </div>
+          <h3>[TITOLO RICORDO 3]</h3>
+          <p>[DESCRIZIONE RICORDO 3]</p>
+        </article>
+
+        <article class="memory-card" style="--tilt: -1deg">
+          <div class="photo-placeholder">
+            <img src="assets/images/foto4.jpg" alt="[DESCRIZIONE FOTO 4]"
+                 onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO 4]'">
+          </div>
+          <h3>[TITOLO RICORDO 4]</h3>
+          <p>[DESCRIZIONE RICORDO 4]</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="reasons" class="section page">
+      <div class="eyebrow">[SOTTOTITOLO DEDICHE]</div>
+      <h2>[TITOLO DELLE DEDICHE]</h2>
+      <p class="section-intro">[TESTO INTRODUTTIVO]</p>
+
+      <div class="reasons-grid">
+        <!-- Duplica questi blocchi per aggiungere altre dediche. -->
+        <article class="reason">
+          <div class="heart">♥</div>
+          <h3>[DEDICA 1 - TITOLO]</h3>
+          <p>[DEDICA 1 - TESTO]</p>
+        </article>
+        <article class="reason">
+          <div class="heart">♥</div>
+          <h3>[DEDICA 2 - TITOLO]</h3>
+          <p>[DEDICA 2 - TESTO]</p>
+        </article>
+        <article class="reason">
+          <div class="heart">♥</div>
+          <h3>[DEDICA 3 - TITOLO]</h3>
+          <p>[DEDICA 3 - TESTO]</p>
+        </article>
+        <article class="reason">
+          <div class="heart">♥</div>
+          <h3>[DEDICA 4 - TITOLO]</h3>
+          <p>[DEDICA 4 - TESTO]</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="letter-section" class="section page">
+      <div class="eyebrow">[SOTTOTITOLO LETTERA]</div>
+      <div class="letter">
+        <h2>[TITOLO DELLA LETTERA]</h2>
+        <p>[SALUTO INIZIALE]</p>
+        <div class="letter-body">[INSERISCI QUI IL TESTO COMPLETO DELLA TUA LETTERA]
+
+[PUOI ANDARE A CAPO PER SEPARARE I PARAGRAFI]</div>
+        <div class="signature">[FIRMA]</div>
+      </div>
+    </section>
+
+    <section id="finale">
+      <div class="eyebrow">[SOTTOTITOLO FINALE]</div>
+      <h2>[DEDICA FINALE]</h2>
+      <p>[ULTIMA FRASE]</p>
+      <div class="final-photo">
+        <img src="assets/images/foto-finale.jpg" alt="[DESCRIZIONE FOTO FINALE]"
+             onerror="this.remove(); this.parentElement.textContent='[INSERISCI FOTO FINALE]'">
+      </div>
+      <p>[FIRMA O MESSAGGIO CONCLUSIVO]</p>
+    </section>
+
+    <footer>[TESTO DEL PIEDE PAGINA]</footer>
+  </main>
+
+  <!-- Musica: aggiungi il file assets/music/song.mp3 -->
+  <audio id="backgroundMusic" loop>
+    <source src="assets/music/song.mp3" type="audio/mpeg">
+  </audio>
+  <button class="music-button hidden" id="musicButton" aria-label="Attiva o disattiva la musica">♫</button>
+
+  <script>
+    /*
+      CONFIGURAZIONE:
+      Inserisci la data di inizio della relazione nel formato YYYY-MM-DD.
+      Esempio di formato: "2021-11-17"
+    */
+    const anniversaryDate = "YYYY-MM-DD";
+
+    const opening = document.getElementById("opening");
+    const mainContent = document.getElementById("main-content");
+    const envelope = document.getElementById("envelope");
+    const openButton = document.getElementById("openButton");
+    const music = document.getElementById("backgroundMusic");
+    const musicButton = document.getElementById("musicButton");
+
+    function openLetter() {
+      envelope.classList.add("open");
+
+      window.setTimeout(() => {
+        opening.classList.add("hidden");
+        mainContent.classList.remove("hidden");
+        musicButton.classList.remove("hidden");
+        updateCounter();
+        window.setInterval(updateCounter, 1000);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 850);
+
+      // La riproduzione viene tentata dopo il clic dell'utente.
+      music.play().catch(() => {
+        // Se il browser blocca la riproduzione, si potrà usare il pulsante musicale.
+      });
+    }
+
+    openButton.addEventListener("click", openLetter);
+    envelope.addEventListener("click", openLetter);
+    envelope.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLetter();
+      }
+    });
+
+    function updateCounter() {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(anniversaryDate)) return;
+
+      const start = new Date(anniversaryDate + "T00:00:00");
+      const now = new Date();
+      let difference = Math.max(0, now - start);
+
+      const days = Math.floor(difference / 86400000);
+      difference %= 86400000;
+      const hours = Math.floor(difference / 3600000);
+      difference %= 3600000;
+      const minutes = Math.floor(difference / 60000);
+      const seconds = Math.floor((difference % 60000) / 1000);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    musicButton.addEventListener("click", async () => {
+      if (music.paused) {
+        try {
+          await music.play();
+          musicButton.textContent = "♫";
+          musicButton.setAttribute("aria-label", "Disattiva la musica");
+        } catch (error) {
+          musicButton.textContent = "×";
+        }
+      } else {
+        music.pause();
+        musicButton.textContent = "♪";
+        musicButton.setAttribute("aria-label", "Attiva la musica");
+      }
+    });
+  </script>
 </body>
 </html>
-```
